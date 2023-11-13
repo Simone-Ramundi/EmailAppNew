@@ -16,6 +16,10 @@ interface  SignupCredentials {
 interface  SignupResponse {
     username: string;
 }
+interface  SignedinResponse {
+    authenticated: boolean;
+    username: string;
+}
 
 @Injectable({
     providedIn: 'root'
@@ -43,10 +47,10 @@ export class AuthService {
         );
     }
     checkAuth(){
-        return this.http.get(
+        return this.http.get<SignedinResponse>(
             `${this.rootUrl}/auth/signedin`,).pipe(
-                tap((response)=>{
-                    console.log(response);
+                tap(({ authenticated})=>{
+                    this.signedin$.next(authenticated)
                 })
             );
     }
