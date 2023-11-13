@@ -23,8 +23,7 @@ interface  SignupResponse {
 export class AuthService {
     rootUrl = "https://api.angular-email.com";
     signedin$ = new BehaviorSubject(false)
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     usernameAvailable(username: string) {
         return this.http.post<UsernameAvailableResponse>(
