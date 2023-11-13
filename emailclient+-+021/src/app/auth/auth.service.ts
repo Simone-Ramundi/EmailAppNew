@@ -32,7 +32,6 @@ export class AuthService {
         );
     }
 
-
     signup(credentials: SignupCredentials) {
         return this.http.post<SignupResponse>(
             `${this.rootUrl}/auth/signup`,
