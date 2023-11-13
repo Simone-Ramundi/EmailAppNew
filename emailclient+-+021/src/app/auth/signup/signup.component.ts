@@ -3,8 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatchPassword} from '../validators/match-password';
 import {UniqueUsername} from '../validators/unique-username';
 import {AuthService} from "../auth.service";
-import {catchError} from "rxjs/operators";
-
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
@@ -59,9 +57,9 @@ export class SignupComponent implements OnInit {
                 },
                 error: (err) => {
                     if (!err.status) {
-                        this.authForm.setErrors({ noConnection: true });
+                        this.authForm.setErrors({noConnection: true});
                     } else {
-                        this.authForm.setErrors({ unknownError: true });
+                        this.authForm.setErrors({unknownError: true});
                     }
                 }
             });

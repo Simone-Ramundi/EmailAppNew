@@ -7,16 +7,17 @@ interface UsernameAvailableResponse {
     available: boolean;
 }
 
-interface  SignupCredentials {
+interface SignupCredentials {
     username: string;
     password: string;
     passwordConfirmation: string;
 }
 
-interface  SignupResponse {
+interface SignupResponse {
     username: string;
 }
-interface  SignedinResponse {
+
+interface SignedinResponse {
     authenticated: boolean;
     username: string;
 }
@@ -27,7 +28,9 @@ interface  SignedinResponse {
 export class AuthService {
     rootUrl = "https://api.angular-email.com";
     signedin$ = new BehaviorSubject(false)
-    constructor(private http: HttpClient) {}
+
+    constructor(private http: HttpClient) {
+    }
 
     usernameAvailable(username: string) {
         return this.http.post<UsernameAvailableResponse>(
@@ -41,17 +44,26 @@ export class AuthService {
     signup(credentials: SignupCredentials) {
         return this.http.post<SignupResponse>(`${this.rootUrl}/auth/signup`, credentials,)
             .pipe(
-            tap(()=>{
-                this.signedin$.next(true)
+                tap(() => {
+                    this.signedin$.next(true)
+                })
+            );
+    }
+
+    checkAuth() {
+        return this.http.get<SignedinResponse>(
+            `${this.rootUrl}/auth/signedin`,).pipe(
+            tap(({authenticated}) => {
+                this.signedin$.next(authenticated)
             })
         );
     }
-    checkAuth(){
-        return this.http.get<SignedinResponse>(
-            `${this.rootUrl}/auth/signedin`,).pipe(
-                tap(({ authenticated})=>{
-                    this.signedin$.next(authenticated)
+    signout(){
+        return this.http.post(`${this.rootUrl}/auth/signout`, {})
+            .pipe(
+                tap(()=>{
+                    this.signedin$.next(false);
                 })
-            );
+            )
     }
 }
