@@ -41,12 +41,12 @@ export class SigninComponent implements OnInit {
         }
         this.authService.signin(this.authForm.value)
             .subscribe({
-                next:() => {
+                next: () => {
                     this.router.navigateByUrl('/inbox');
                 },
-                error: ({ error })=> {
-                    if(error.username || error.password) {
-                        this.authForm.setErrors({ credentials: true });
+                error: ({error}) => {
+                    if (error.username || error.password) {
+                        this.authForm.setErrors({credentials: true});
                     }
                 }
             });
