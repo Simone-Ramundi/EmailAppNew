@@ -1,19 +1,27 @@
-import { Injectable } from '@angular/core';
-import { HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Email} from "./email";
+
 interface EmailSummary {
-  id: number;
-  subject: string;
-  from: string;
+    id: number;
+    subject: string;
+    from: string;
 }
+
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EmailService {
-  rootUrl = "https://api.angular-email.com";
-  constructor(private http: HttpClient) { }
+    rootUrl = "https://api.angular-email.com";
 
-  getEmails(){
-    return this.http.get<EmailSummary[]>(`${this.rootUrl}/emails`, {
-    })
-  }
+    constructor(private http: HttpClient) {
+    }
+
+    getEmails() {
+        return this.http.get<EmailSummary[]>(`${this.rootUrl}/emails`, {})
+    }
+
+    getEmail(id: string) {
+        return this.http.get<Email>(`${this.rootUrl}/emails/${id}`, {})
+    }
 }

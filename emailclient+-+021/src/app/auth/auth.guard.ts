@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {CanLoad, Route, UrlSegment, Router} from '@angular/router';
+import {CanLoad, Route, Router, UrlSegment} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from "./auth.service";
-import { take, skipWhile, tap} from "rxjs/operators";
+import {skipWhile, take, tap} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,8 @@ export class AuthGuard implements CanLoad {
     constructor(
         private authService: AuthService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     canLoad(
         route: Route,
@@ -19,8 +20,8 @@ export class AuthGuard implements CanLoad {
         return this.authService.signedin$.pipe(
             skipWhile(value => value === null),
             take(1),
-            tap((authenticated)=> {
-                if(!authenticated){
+            tap((authenticated) => {
+                if (!authenticated) {
                     this.router.navigateByUrl('/');
                 }
             })
