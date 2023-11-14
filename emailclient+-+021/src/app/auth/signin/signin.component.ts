@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {AuthService} from "../auth.service";
     styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-    authForm = new  FormGroup({
+    authForm = new FormGroup({
         username: new FormControl('',
             [
                 Validators.required,
@@ -23,19 +23,26 @@ export class SigninComponent implements OnInit {
                 Validators.maxLength(20)
             ]),
     })
-    constructor(private authService: AuthService ) {
+    protected readonly onsubmit = onsubmit;
+
+    constructor(private authService: AuthService) {
     }
 
-    ngOnInit() {}
-    onSubmit(){
-        if(this.authForm.invalid) {
+    ngOnInit() {
+    }
+
+    onSubmit() {
+        if (this.authForm.invalid) {
             return
         }
         this.authService.signin(this.authForm.value)
-            .subscribe(()=>{
-
+            .subscribe({
+                next:() => {},
+                error: ({ error })=> {
+                    if(error.username || error.password) {
+                        this.authForm.setErrors({ credentials: true });
+                    }
+                }
             });
     }
-
-    protected readonly onsubmit = onsubmit;
 }
