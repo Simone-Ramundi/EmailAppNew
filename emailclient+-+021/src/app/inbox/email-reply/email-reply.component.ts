@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Email} from "../email";
-
+import {EmailService} from "../email.service";
 @Component({
     selector: 'app-email-reply',
     templateUrl: './email-reply.component.html',
@@ -9,7 +9,7 @@ import {Email} from "../email";
 export class EmailReplyComponent implements OnInit {
     showModal = false;
     @Input() email: Email;
-    constructor() {
+    constructor(private emailService: EmailService) {
     }
 
     ngOnInit() {
@@ -22,8 +22,10 @@ export class EmailReplyComponent implements OnInit {
             text: `\n\n\n--------${this.email.from} wrote:\n> ${text}`
         }
     }
-    onSubmit(email:Email){
-
+    onSubmit(email: Email){
+    this.emailService.sendEmail(email).subscribe(()=>{
+        this.showModal = false
+    });
     }
 
     protected readonly onpageshow = onpageshow;
