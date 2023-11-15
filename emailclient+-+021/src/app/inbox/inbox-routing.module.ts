@@ -4,7 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {PlaceholderComponent} from "./placeholder/placeholder.component";
 import {EmailShowComponent} from "./email-show/email-show.component";
 import {EmailResolverService} from "./email-resolver.service";
-import { NotFoundComponent } from "./not-found/not-found.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
     {
