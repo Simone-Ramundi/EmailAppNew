@@ -1,5 +1,5 @@
 export interface Email {
-    id: number;
+    id: string;
     subject: string;
     text: string;
     to: string;
