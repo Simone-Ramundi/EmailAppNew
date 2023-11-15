@@ -2,10 +2,12 @@
     <div>
         <h3>{{ email.subject }}</h3>
         <div>
-            Form: <i>{{ email.from }}</i>
+            From: <i>{{ email.from }}</i>
         </div>
         <div>
             To: <i>{{ email.to }}</i>
         </div>
     </div>
+</div>
+<div  [innerHTML]="email.html" class="ui divider">
 </div>
