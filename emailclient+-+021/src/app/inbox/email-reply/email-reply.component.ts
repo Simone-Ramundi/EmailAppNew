@@ -16,17 +16,31 @@ export class EmailReplyComponent implements OnChanges {
     ngOnChanges() {
         console.log('Original email:', this.email);
 
-        const text = this.email.text.replace(/\n/gi, '\n> ');
+        if (this.email && this.email.text) {
+            const text = this.email.text.replace(/\n/gi, '\n> ');
 
-        this.email = {
-            ...this.email,
-            from: this.email.to,
-            to: this.email.from,
-            subject: `RE: ${this.email.subject}`,
-            text: `\n\n\n--------${this.email.from} wrote:\n> ${text}`
+            this.email = {
+                ...this.email,
+                from: this.email.to,
+                to: this.email.from,
+                subject: `RE: ${this.email.subject}`,
+                text: `\n\n\n--------${this.email.from} wrote:\n> ${text}`
+            }
+            console.log('Modified email:', this.email);
+        } else {
+            const text = ''
+            this.email = {
+                ...this.email,
+                from: this.email.to,
+                to: this.email.from,
+                subject: `RE: ${this.email.subject}`,
+                text: `\n\n\n--------${this.email.from} wrote:\n> ${text}`
+            }
+            console.log('Invalid email object: changed', this.email);
+
         }
 
-        console.log('Modified email:', this.email);
+
     }
     onSubmit(email: Email){
     this.emailService.sendEmail(email).subscribe(()=>{
