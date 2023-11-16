@@ -1,7 +1,7 @@
-import {AuthValidators} from './auth-validators';
+import { AuthValidators } from './auth-validators';
 
 describe('AuthValidators', () => {
-    it('should create an instance', () => {
-        expect(new AuthValidators()).toBeTruthy();
-    });
+  it('should create an instance', () => {
+    expect(new AuthValidators()).toBeTruthy();
+  });
 });

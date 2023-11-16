@@ -1,24 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
-    selector: 'app-signout',
-    templateUrl: './signout.component.html',
-    styleUrls: ['./signout.component.css']
+  selector: 'app-signout',
+  templateUrl: './signout.component.html',
+  styleUrls: ['./signout.component.css']
 })
 export class SignoutComponent implements OnInit {
+  constructor(private authService: AuthService, private router: Router) {}
 
-    constructor(
-        private authService: AuthService,
-        private router: Router
-    ) {
-    }
-
-    ngOnInit() {
-        this.authService.signout().subscribe(() => {
-            // Navigate user back to signin page
-            this.router.navigateByUrl('/');
-        });
-    }
+  ngOnInit() {
+    this.authService.signout().subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
+  }
 }

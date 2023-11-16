@@ -1,26 +1,26 @@
 .item a {
-    color: black;
+  color: black;
 }
 
 a.active {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 a.active:before {
-    content: '>';
-    font-size: 20px;
-    margin-right: 10px;
+  content: '>';
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 .content {
-    width: 90%;
+  width: 90%;
 }
 
 .trim {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }

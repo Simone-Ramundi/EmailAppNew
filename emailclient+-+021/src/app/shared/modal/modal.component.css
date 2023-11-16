@@ -1,11 +1,11 @@
 .actions:empty {
-    display: none;
+  display: none;
 }
 
 .actions-default {
-    display: none;
+  display: none;
 }
 
 .actions:empty + .actions-default {
-    display: block;
+  display: block;
 }
