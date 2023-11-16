@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {Email} from "../email";
 import {EmailService} from "../email.service";
+
 @Component({
     selector: 'app-email-reply',
     templateUrl: './email-reply.component.html',
@@ -13,6 +14,8 @@ export class EmailReplyComponent implements OnChanges {
     }
 
     ngOnChanges() {
+        console.log('Original email:', this.email);
+
         const text = this.email.text.replace(/\n/gi, '\n> ');
 
         this.email = {
@@ -22,6 +25,8 @@ export class EmailReplyComponent implements OnChanges {
             subject: `RE: ${this.email.subject}`,
             text: `\n\n\n--------${this.email.from} wrote:\n> ${text}`
         }
+
+        console.log('Modified email:', this.email);
     }
     onSubmit(email: Email){
     this.emailService.sendEmail(email).subscribe(()=>{
