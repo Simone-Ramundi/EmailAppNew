@@ -26,6 +26,12 @@ export class EmailService {
     }
 
     sendEmail(email: Email){
+        debugger
+        if (typeof email.text !== 'string') {
+            console.log("missing text or not a string")
+            return
+        }
+        console.log("Email Sent")
         return this.http.post(`${this.rootUrl}/emails`, email,)
     }
 }
